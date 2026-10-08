@@ -192,8 +192,7 @@ help us improve this document by sending information to contact_oss@megagon.ai.
 The dataset sources used by this project are listed below, including their copyright
 holders and license information. Data is obtained from the linked sources or supplied
 locally, as described in [Using your own trajectories](#using-your-own-trajectories).
-The `src/crg_ce/datasets/oh_benchmarks` directory contains dataset type definitions,
-not dataset records.
+
 
 For datasets with portions released under different licenses, refer to the linked
 sources for the terms governing each portion.
