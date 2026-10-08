@@ -1,0 +1,40 @@
+{% if trajectory is defined and trajectory %}
+<trajectory>
+{{ trajectory }}
+</trajectory>
+{% endif %}
+
+{% if problem_statement is defined and problem_statement %}
+<users_task>
+{{ problem_statement }}
+</users_task>
+{% endif %}
+
+Construct the success-condition claim tree for:
+
+- **Overall Goal Identifier:** {{ overall_goal }}
+- **Overall Claim:** {{ overall_goal_auditable_claim }}
+
+## Phase 1: Decompose and Particularize Claims
+
+Iteratively decompose and particularize the Overall Claim until every leaf is an atomic, independently verifiable claim. The goal tree may have at most {{ max_goal_decomposition_depth }} strategy edges on any root-to-leaf path. Use the following tools:
+
+1. `{{ divide_and_conquer_function_name }}` decomposes an abstract or concrete claim into two or more claims at approximately the same level of concreteness. For each decomposition:
+  - Every child must be necessary for its parent.
+  - All children together must be sufficient for their parent.
+  - The parent must be true exactly when all its children are true.
+2. `{{ particularize_function_name }}` restates one abstract, task-agnostic claim as one concrete, task-aware claim. The new claim must neither weaken nor strengthen its parent; in the task context, both must have the same truth condition. Generally, an abstract claim should be particularized at most once.
+
+### Guidance
+- Divide broad abstract claims into smaller, still abstract claims before particularizing them. Particularize only when the claim is concrete enough to be evaluated in the context of the user's task.
+- Do not jump from an abstract claim to concrete task details through divide-and-conquer. Maintain a consistent level of abstraction between parent and child claims. Use particularization to move from abstract to concrete.
+- Apply the system prompt's atomicity rule: split claims requiring separate evidence, but keep attributes, examples, or checks together when the same evidence evaluates them.
+- Keep enough context that each claim is clear and evaluable without reading its parent.
+- Describe what must be true of the final result, not how the agent tried to achieve it. Different correct implementations should satisfy the same claims.
+- Prefer strong, clear success-condition claims. Do not weaken or strengthen a claim when particularizing. Do not weaken claims to match the observed trajectory or turn actions, tests, or implementation details into success conditions.
+
+- Use unique goal identifiers and each target goal's exact identifier and claim.
+- Make as many independent strategy calls in each step as you can determine soundly, as long as they develop different claims within the graph. After observing the updated graph, continue developing any non-atomic leaves. When the complete graph has only atomic leaves, call `{{ finish_function_name }}`.
+- In general: prefer simple graphs.
+
+Produce claim structure only in this phase. Do not cite or gather evidence yet.

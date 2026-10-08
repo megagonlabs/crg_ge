@@ -1,0 +1,11 @@
+# Replay the main last-action length-normalized sequence-probability baseline with fixed T=15.
+dataset:
+  path: Brendan/openhands_ce_data_enterprise_ops
+  split: test
+estimator:
+  estimator_type: replay
+  replay_from: runs/test_set/enterprise_ops/baselines/log_probs_estimator/qwen38_27b_last_action_fp8.yaml
+  calibration:
+    mode: temperature
+    temperature: 15.0
+max_workers: 32

@@ -1,0 +1,25 @@
+# Evaluate a seeded sample of GPT-5.6-sol SkillsBench graphs with Qwen3.8-27B-FP8.
+graph_run_config: runs/test_set/skills_bench/ours/gpt_56_sol_agentic_fp8_max_depth_5.yaml
+dataset:
+  path: Brendan/openhands_ce_data_skills_bench
+  split: test
+  shuffle: true
+  seed: 42
+  slice: "0:50"
+max_workers: 32
+sample_n_pairs: 20
+agent:
+  model_name: openai/Qwen/Qwen3.8-27B-FP8
+  api_base: http://localhost:21046/v1
+  reasoning_effort: medium
+  top_p: 0.95
+prompts:
+  system_prompt: prompts/gqa/local/entailment/v0/system_prompt.j2
+  entailment_task_prompt: prompts/gqa/local/entailment/v0/task_prompt.j2
+  examples: prompts/gqa/local/entailment/v0/examples.txt
+metrics:
+  joint_sufficiency: true
+  child_necessity: true
+  non_redundant_siblings: true
+  quality_of_particularization: true
+  confidence_aggregation_mse: false

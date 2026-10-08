@@ -1,0 +1,26 @@
+You are evaluating whether an agent successfully completed a user's task. Review the complete agent trajectory below, including its final answer and any tool results.
+
+# Context
+{% if domain_success_criteria %}
+<domain_success_criteria>
+{{ domain_success_criteria }}
+</domain_success_criteria>
+{% endif %}
+
+<problem_statement>
+{{ problem_statement }}
+</problem_statement>
+
+<agent_trajectory>
+{{ trajectory }}
+</agent_trajectory>
+
+# Task Instructions
+{{ output_instruction }}
+
+## Guidance
+We suggest using a confidence-grounded assurance case graph to structure your reasoning.
+
+A confidence-grounded assurance case graph is a structured argument for whether a task was completed correctly. It starts with that overall claim: "the submitted result is correct", breaks it into a complete set of smaller, auditable claims, and evaluates each claim using concrete evidence from the trajectory. Evidence may support or undermine a claim, or reveal uncertainty where the trajectory is incomplete. Together, the claims and evidence should account for every material reason the task may have succeeded or failed.
+
+Use this structure as a scaffold for your confidence reasoning. Break correctness into complete, checkable parts; assess each part against relevant trajectory evidence; then combine those assessments into an overall confidence. You do not need to output a graph.

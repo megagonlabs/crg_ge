@@ -1,0 +1,12 @@
+## Phase 2: Gather Evidence
+
+For every atomic leaf claim in the preceding decomposition, gather the concrete trajectory observations needed to assess it. Checking one claim may use several pieces of evidence, and one piece of evidence may be relevant to multiple claims.
+
+- For each claim, include both supporting and undermining evidence if present.
+- Reuse an evidence item when the same observation contributes to multiple claims.
+- Cite the precise trajectory step numbers for every observed action or event.
+- Do not infer success merely because no failure was observed.
+
+If the trajectory lacks relevant evidence for a claim, create an evidence item stating that evidence is absent, use an empty `step_numbers` list. Choose an appropriate edge label. The absence may leave the claim uncertain; it does not necessarily establish that the claim is false.
+
+You have exactly {{ evidence_gathering_max_iterations }} steps to call `{{ gather_evidence_function_name }}` and record the evidence catalog and its typed edges.

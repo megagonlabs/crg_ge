@@ -1,0 +1,14 @@
+# Surrogate-model likelihood of the final OpenHands action text.
+dataset:
+  path: Brendan/openhands_ce_data_swebench
+  split: test
+  slice: "0:8"
+estimator:
+  estimator_type: log_probs_estimator
+  aggregation_type: last_action_mean_log_prob
+  agent:
+    model_name: openai/Qwen/Qwen3.8-27B-FP8
+    api_base: http://localhost:21046/v1
+    max_concurrent_llm_calls: 2
+execution_mode: async
+max_workers: 4

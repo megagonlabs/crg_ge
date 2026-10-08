@@ -1,0 +1,75 @@
+# SkillsBench graph-construction max-depth ablation: max_steps=5.
+dataset:
+  path: Brendan/openhands_ce_data_dev
+  split: valid
+  shuffle: true
+  seed: 42
+execution_mode: async
+max_workers: 18
+estimator:
+  estimator_type: oh_gsn
+  graph_generator:
+    generator_type: agentic
+    max_steps: 5
+    agent:
+      max_concurrent_llm_calls: 16
+      model_name: openai/Qwen/Qwen3.8-27B-FP8
+      api_base: "http://localhost:21046/v1"
+      tools_preset: default
+      reasoning_effort: "medium"
+      top_p: 0.95
+      completion_kwargs:
+        temperature: 1.0
+        top_k: 20
+        presence_penalty: 0
+        min_p: 0.0
+        repetition_penalty: 1.0
+    prompts:
+      gather_evidence_method: all_at_once
+      evidence_edge_labels: [supports, undermines, unverified]
+      decompose_goal_included_fields: [trajectory, problem_statement]
+      gather_evidence_included_fields: []
+      skip_system_user_messages_in_trajectory: true
+      goal_zero_task_name: Successful Final Outcome
+      goal_zero_auditable_claim: The agent's final delivered result satisfies the substantive success criteria of the user's task
+      system_prompt_instruction: prompts/gsn/direct/agentic/system_prompt.j2
+      goal_decompose_instruction: prompts/gsn/direct/agentic/goal_decomposition.j2
+      gather_evidence_instruction: prompts/gsn/direct/agentic/evidence_gathering.j2
+      assign_confidence_to_goal_instruction: prompts/not_used.j2
+      assign_confidence_to_evidence_instruction: prompts/not_used.j2
+      domain_success_criteria:
+        by_benchmark:
+          swe-smith: prompts/domains/swe/agent_success_criteria.txt
+          enterprise-ops-gym: prompts/domains/enterprise/agent_success_criteria.txt
+          skillsbench: prompts/domains/skillsbench/agent_success_criteria.txt
+  graph_populator:
+    generator_type: litellm
+    confidence_population_mode: goal_leaves_product
+    verbalization:
+      scale_min: 0
+      scale_max: 100
+      scale_suffix: "%"
+    agent:
+      max_concurrent_llm_calls: 16
+      model_name: openai/Qwen/Qwen3.8-27B-FP8
+      api_base: "http://localhost:21046/v1"
+      tools_preset: default
+      reasoning_effort: "medium"
+      top_p: 0.95
+      completion_kwargs:
+        temperature: 1.0
+        top_k: 20
+        presence_penalty: 0
+        min_p: 0.0
+        repetition_penalty: 1.0
+    prompts:
+      skip_system_user_messages_in_trajectory: true
+      decompose_goal_included_fields: [trajectory, problem_statement]
+      system_prompt_instruction: prompts/not_used.j2
+      confidence_estimation_system_prompt_instruction: prompts/gsn/direct/agentic/estimation/system_prompt.j2
+      goal_decompose_instruction: prompts/not_used.j2
+      gather_evidence_instruction: prompts/not_used.j2
+      assign_confidence_to_goal_instruction: prompts/gsn/direct/agentic/estimation/assign_confidence_to_goal.j2
+      assign_confidence_to_evidence_instruction: prompts/gsn/direct/agentic/estimation/assign_confidence_to_evidence.j2
+    condense:
+      mode: summarize_uncited

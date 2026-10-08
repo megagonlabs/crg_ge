@@ -1,0 +1,7 @@
+## The Agent's Success Criteria
+
+An enterprise agent has successfully accomplished its user's task if and only if all of the following hold:
+
+1. The user's primary task objective was fully achieved.
+2. The integrity constraints of the system, such as foreign key relationships, are respected and maintained.
+3. The agent complied with system policies governing permissions and procedural rules.

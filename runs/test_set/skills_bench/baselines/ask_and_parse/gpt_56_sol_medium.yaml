@@ -1,0 +1,22 @@
+# Ex-situ LiteLLM verbalized confidence-estimation baseline.
+dataset:
+  path: Brendan/openhands_ce_data_skills_bench
+  split: test
+  slice: "0:8"
+estimator:
+  estimator_type: litellm_verbal
+  litellm:
+    query_type: ask_and_parse
+    verbalization:
+      scale_min: 0
+      scale_max: 100
+      scale_suffix: "%"
+    domain_success_criteria:
+      by_benchmark:
+        swe-smith: prompts/domains/swe/agent_success_criteria.txt
+        enterprise-ops-gym: prompts/domains/enterprise/agent_success_criteria.txt
+        skillsbench: prompts/domains/skillsbench/agent_success_criteria.txt
+    agent:
+      model_name: gpt-5.6-sol
+      reasoning_effort: medium
+max_workers: 8

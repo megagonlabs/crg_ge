@@ -1,0 +1,12 @@
+# Replay Qwen reason-as-graph test predictions with its final_valid_v2-learned NLL temperature.
+dataset:
+  path: Brendan/openhands_ce_data_swebench
+  split: test
+estimator:
+  estimator_type: replay
+  replay_from: runs/test_set/swebench/baselines/reason_as_graph/qwen38_27b_medium.yaml
+  calibration:
+    mode: temperature
+    calibrate_from: runs/dev_set/baselines/reason_as_graph/qwen38_27b_medium.yaml
+    allow_learn: false
+max_workers: 32

@@ -1,0 +1,12 @@
+# Replay test-set predictions with the validation-learned reason-as-graph temperature.
+dataset:
+  path: Brendan/openhands_ce_data_skillsbench_44_v2
+  split: test
+estimator:
+  estimator_type: replay
+  replay_from: runs/test_set/skillsbench_44_v2/baselines/reason_as_graph/qwen38_27b_medium.yaml
+  calibration:
+    mode: temperature
+    calibrate_from: runs/dev_set/baselines/reason_as_graph/qwen38_27b_medium.yaml
+    allow_learn: false
+max_workers: 32

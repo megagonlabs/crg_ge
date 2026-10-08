@@ -1,0 +1,12 @@
+# Re-aggregate the final_valid_v2 Qwen 3.8 graphs using arithmetic mean.
+dataset:
+  path: Brendan/openhands_ce_data_dev
+  split: valid
+  shuffle: true
+  seed: 42
+max_workers: 32
+estimator:
+  estimator_type: gsn_aggregate
+  replay_from: runs/dev_set/ours/qwen38_27b_agentic_fp8_max_depth_5.yaml
+  aggregation_type: arithmetic_mean
+

@@ -1,0 +1,43 @@
+<example_agent_task_input>
+Fictional task: correct a box-count calculation in a toy packing application.
+
+The function `boxes_needed(item_count, box_capacity)` returns one box for every
+positive item count, even when the items cannot fit in a single box. Change it to
+return the smallest number of boxes that can hold all items. An empty shipment
+should require zero boxes. For example, nine items with a capacity of four items
+per box should require three boxes, while zero items should require zero boxes.
+Inputs have a nonnegative item count and a positive box capacity. Keep the public
+function signature and unrelated application behavior unchanged.
+</example_agent_task_input>
+
+<example_decisions>
+### Example 1
+Premise: The delivered patch changes the implementation of boxes_needed(item_count, box_capacity), the function named in the task.
+Hypothesis: The patch modifies the function where the reported box-count problem occurs.
+Label: entailment
+Rationale: The premise identifies the modified function as the same function described in the task, so the hypothesis follows directly.
+
+### Example 2
+Premise: A focused test confirms that nine items with a box capacity of four now require three boxes.
+Hypothesis: The patch introduces no regressions anywhere in the application.
+Label: neutral
+Rationale: One successful test establishes the checked result but provides no evidence about other inputs or unrelated parts of the application.
+
+### Example 3
+Premise: The patch preserves the public signature of boxes_needed(item_count, box_capacity).
+Hypothesis: All application behavior outside the reported box-count problem remains unchanged.
+Label: neutral
+Rationale: A function can retain its signature while its implementation or other application components change, so the premise does not establish the hypothesis.
+
+### Example 4
+Premise: The patch preserves all public function signatures. AND The patch leaves all behavior outside the reported box-count problem unchanged.
+Hypothesis: The patch changes neither the application's public function signatures nor its behavior outside the reported problem.
+Label: entailment
+Rationale: Taken together, the two claims in the premise establish both parts of the hypothesis; neither claim alone would establish both parts.
+
+### Example 5
+Premise: The agent produced a patch file for the toy application.
+Hypothesis: The patch corrects the implementation of boxes_needed so that it rounds the required box count upward.
+Label: neutral
+Rationale: The existence of a patch says nothing about which function it changes or whether its changes solve the task.
+</example_decisions>

@@ -1,0 +1,10 @@
+# Re-aggregate saved goal-leaf confidences with adaptive claim dropout (k=7 expected leaves).
+dataset:
+  path: Brendan/openhands_ce_data_skillsbench_44_v2
+  split: test
+estimator:
+  estimator_type: gsn_aggregate
+  replay_from: runs/test_set/skillsbench_44_v2/ours/qwen38_27b_agentic_fp8_max_depth_5.yaml
+  aggregation_type: product_leaf_adaptive_claim_dropout
+  k_expected_leaves: 7
+max_workers: 32

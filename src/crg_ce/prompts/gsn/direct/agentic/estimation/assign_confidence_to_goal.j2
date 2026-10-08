@@ -1,0 +1,66 @@
+# Context
+
+<overall_goal>
+Goal: {{ overall_goal }}
+Claim: {{ overall_goal_auditable_claim }}
+</overall_goal>
+
+{% if problem_statement is defined and problem_statement %}<problem_statement>
+{{ problem_statement }}
+</problem_statement>
+
+{% endif -%}
+<trajectory>
+{{ trajectory }}
+</trajectory>
+
+<related_claims>
+{% if predecessor_contexts -%}
+{% for predecessor_context in predecessor_contexts -%}
+{% if not loop.first %}
+{% endif -%}
+{{ loop.index }}. Relationship to target: {{ predecessor_context.relationship_type }}
+   Related Claim: {{ predecessor_context.node.auditable_claim }}
+{% if predecessor_context.node.confidence != -1 %}   Normalized Confidence: {{ "%.2f"|format(predecessor_context.node.confidence) }}
+{% endif -%}
+{% if predecessor_context.node.step_numbers is defined %}   Evidence Steps: {{ predecessor_context.node.step_numbers | join(", ") }}
+{% endif -%}
+{% if predecessor_context.node.contribution is defined %}   Contribution: {{ predecessor_context.node.contribution }}
+{% endif -%}
+{% if predecessor_context.node.reasoning is defined and predecessor_context.node.reasoning %}   Reasoning: {{ predecessor_context.node.reasoning }}
+{% endif -%}
+{% endfor -%}
+{% else %}
+No related claims are available; base the estimate on the trajectory.
+{% endif -%}
+</related_claims>
+
+# Task Instructions
+
+Estimate whether the target claim is true and can soundly support its parent claim.
+Judge this claim alone, not whether the overall task succeeded.
+Weigh predecessor confidences as evidence rather than averaging them.
+In the absence of evidence, consider the claim, any available trajectory information, and your priors about this problem.
+
+Think carefully about evidence relationships:
+- if evidence suggests a claim is unverified, do not assume it is False. Instead, establish confidence considering your priors: how likely is it that this claim is true, even though it was not formally verified by the agent? Such claims may depend on world knowledge, or reasoning inferences about the problem which were not formally verified, but may nonetheless be true. Use confidence to reflect uncertainty, not certainty in falsehood. For reference, a uniform prior suggests a confidence of {{ "%g"|format((0.5 * (scale_max - scale_min))|round(0, "ceil")) }}{{ scale_suffix }}.
+
+Confidence guidance:
+- {{ "%g"|format(0.8 * scale_max) }}–{{ "%g"|format(scale_max) }}{{ scale_suffix }}: related assessments and trajectory context overwhelmingly confirm the claim.
+- {{ "%g"|format(0.6 * scale_max) }}–{{ "%g"|format(0.8 * scale_max) }}{{ scale_suffix }}: related assessments directly support the claim; remaining doubt is minor.
+- {{ "%g"|format(0.4 * scale_max) }}–{{ "%g"|format(0.6 * scale_max) }}{{ scale_suffix }}: the claim is plausible but notable unknowns remain.
+- {{ "%g"|format(0.2 * scale_max) }}–{{ "%g"|format(0.4 * scale_max) }}{{ scale_suffix }}: the available evidence suggests this claim is more likely to be false than true.
+- {{ "%g"|format(scale_min) }}–{{ "%g"|format(0.2 * scale_max) }}{{ scale_suffix }}: related assessments or trajectory context overwhelmingly contradict the claim, establishing its falsehood.
+
+Return a confidence from {{ "%g"|format(scale_min) }}{{ scale_suffix }} (no confidence) to {{ "%g"|format(scale_max) }}{{ scale_suffix }} (complete confidence) and a brief rationale.
+
+{% if scale_suffix == "%" %}
+If you are using a percentage scale, please round your confidence to the nearest whole number between {{ "%g"|format(scale_min) }} and {{ "%g"|format(scale_max) }}.
+{% endif %}
+
+<target_goal>
+Goal: {{ goal.goal_name }}
+Claim: {{ goal.auditable_claim }}
+{% if goal.reasoning %}Reasoning: {{ goal.reasoning }}
+{% endif -%}
+</target_goal>

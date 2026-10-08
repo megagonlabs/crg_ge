@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying manuscript when using this software."
+type: software
+title: "Confidence Reasoning Graphs"
+version: 0.0.1
+license-url: "https://github.com/megagonlabs/crg_ge/blob/main/LICENSE"
+repository-code: "https://github.com/megagonlabs/crg_ge"
+authors:
+  - given-names: Brendan
+    family-names: King
+  - given-names: Farima
+    family-names: Fatahi Bayat
+  - given-names: Jean-Flavien
+    family-names: Bussotti
+  - given-names: Pouya
+    family-names: Pezeshkpour
+  - given-names: Estevam
+    family-names: Hruschka
+preferred-citation:
+  type: unpublished
+  title: "Confidence Reasoning Graphs: Structured Confidence Estimation for LLM Agents"
+  authors:
+    - given-names: Brendan
+      family-names: King
+    - given-names: Farima
+      family-names: Fatahi Bayat
+    - given-names: Jean-Flavien
+      family-names: Bussotti
+    - given-names: Pouya
+      family-names: Pezeshkpour
+    - given-names: Estevam
+      family-names: Hruschka
+  year: 2026
+  notes: "Submitted to ICLR 2027."
+  url: "https://openreview.net/forum?id=Frn1IZARzJ"

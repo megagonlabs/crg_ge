@@ -1,0 +1,12 @@
+# Learn an NLL temperature from the completed final_valid_v2 ask-and-parse run.
+dataset:
+  path: Brendan/openhands_ce_data_dev
+  split: valid
+estimator:
+  estimator_type: replay
+  replay_from: runs/dev_set/baselines/ask_and_parse/qwen38_27b_medium.yaml
+  calibration:
+    mode: temperature
+    calibrate_from: runs/dev_set/baselines/ask_and_parse/qwen38_27b_medium.yaml
+    allow_learn: true
+max_workers: 32

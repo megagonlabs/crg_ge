@@ -1,0 +1,20 @@
+You are evaluating whether an agent successfully completed a user's task. Review the complete agent trajectory below, including the user's initial task, the agents actions, its final answer and any tool results.
+
+# Context
+{% if domain_success_criteria %}
+<domain_success_criteria>
+{{ domain_success_criteria }}
+</domain_success_criteria>
+{% endif %}
+
+<problem_statement>
+{{ problem_statement }}
+</problem_statement>
+
+<agent_trajectory>
+{{ trajectory }}
+</agent_trajectory>
+
+# Task Instructions
+
+Answer the following question: Did the agent successfully complete the user's task? Respond with either "True" or "False", prefixed by "Answer: ".

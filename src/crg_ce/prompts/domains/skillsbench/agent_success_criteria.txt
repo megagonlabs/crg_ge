@@ -1,0 +1,6 @@
+## The Agent's Success Criteria
+
+An agent has successfully accomplished its user's task if and only if all of the following hold:
+
+1. All the requirements in the users stated task have been achieved.
+2. All required artifacts have been produced correctly.

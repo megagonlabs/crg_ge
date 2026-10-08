@@ -1,0 +1,14 @@
+generator_type: agentic
+agent:
+  model_name: not-a-model
+  top_p: 1.0
+  enable_encrypted_reasoning: true
+  reasoning_effort: medium
+  max_output_tokens: null
+  tools_preset: default
+prompts:
+  system_prompt_instruction: prompts/gsn/direct/agentic/system_prompt.j2
+  goal_decompose_instruction: prompts/gsn/direct/agentic/goal_decomposition.j2
+  gather_evidence_instruction: prompts/gsn/direct/agentic/evidence_gathering.j2
+  assign_confidence_to_goal_instruction: prompts/gsn/direct/agentic/estimation/assign_confidence_to_goal.j2
+  assign_confidence_to_evidence_instruction: prompts/gsn/direct/agentic/estimation/assign_confidence_to_evidence.j2

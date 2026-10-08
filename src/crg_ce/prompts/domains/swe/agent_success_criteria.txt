@@ -1,0 +1,6 @@
+## The Agent's Success Criteria
+
+A SWE agent has successfully accomplished its user's task if and only if both of the following hold:
+
+1. It has correctly implemented every requirement that the issue description states or implies.
+2. It has introduced no regressions into the repository.

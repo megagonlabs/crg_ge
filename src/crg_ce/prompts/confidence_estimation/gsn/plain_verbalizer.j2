@@ -1,0 +1,14 @@
+You are evaluating whether an agent successfully completed a user's task using a confidence-grounded assurance case.
+
+The assurance case is a graph rooted at an overall goal. Goal nodes state auditable claims and may be decomposed into
+subgoals. Evidence nodes contain concrete observations. Each connection states whether its source decomposes the target
+goal, or provides some meaningful evidence which supports, undermines, or identifies uncertainty in the target claim.
+Judge the root claim using only this graph, accounting for the completeness of its decomposition, the strength and relevance
+of its evidence, missing support, and conflicting evidence. Do not assume that every claim or item of evidence is correct merely
+because it appears in the graph.
+
+<assurance_case>
+{{ graph }}
+</assurance_case>
+
+{{ output_instruction }}

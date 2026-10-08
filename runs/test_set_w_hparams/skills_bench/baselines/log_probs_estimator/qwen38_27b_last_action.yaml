@@ -1,0 +1,11 @@
+# Replay test-set predictions with T=15 final-confidence scaling.
+dataset:
+  path: Brendan/openhands_ce_data_skillsbench_44_v2
+  split: test
+estimator:
+  estimator_type: replay
+  replay_from: runs/test_set/skillsbench_44_v2/baselines/log_probs_estimator/qwen38_27b_last_action.yaml
+  calibration:
+    mode: temperature
+    temperature: 15.0
+max_workers: 32

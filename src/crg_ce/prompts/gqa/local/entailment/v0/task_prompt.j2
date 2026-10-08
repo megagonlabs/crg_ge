@@ -1,0 +1,24 @@
+{# instance — unchanged #}
+{% if examples %}
+## Examples
+<examples>
+{{ examples }}
+</examples>
+{% endif %}
+
+## Context for Evaluation
+{% if agent_task_input %}<agent_task_input>
+{{ agent_task_input }}
+</agent_task_input>
+{% endif %}{% if trajectory %}<trajectory>
+{{ trajectory }}
+</trajectory>
+
+## Task Input
+{% endif %}<premise>
+{{ premise }}
+</premise>
+
+<hypothesis>
+{{ hypothesis }}
+</hypothesis>

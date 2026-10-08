@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {
+      "id": "node-1",
+      "confidence": 0.75,
+      "confidence_rationale": null,
+      "goal_name": "Test goal",
+      "auditable_claim": "The test goal is satisfied",
+      "reasoning": "Used to exercise graph serialization",
+      "confidence_in_children": -1.0,
+      "kind": "GSNGoalNode"
+    }
+  ],
+  "edges": [
+    {
+      "source": "node-1",
+      "target": "node-1",
+      "relationship_type": null
+    }
+  ]
+}

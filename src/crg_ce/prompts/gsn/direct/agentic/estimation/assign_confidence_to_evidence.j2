@@ -1,0 +1,37 @@
+# Context
+
+<overall_goal>
+Goal: {{ target_goal }}
+Claim: {{ target_goal_auditable_claim }}
+</overall_goal>
+
+{% if problem_statement is defined and problem_statement %}<problem_statement>
+{{ problem_statement }}
+</problem_statement>
+
+{% endif -%}
+<trajectory>
+{{ trajectory }}
+</trajectory>
+
+# Task Instructions
+
+Estimate whether the target evidence claim is true and, when a contribution is stated, can soundly make that contribution. Judge this claim alone, not whether the overall task succeeded. Missing relevant evidence creates uncertainty rather than automatically making the claim false.
+
+Confidence guidance:
+- {{ "%g"|format(0.8 * scale_max) }}–{{ "%g"|format(scale_max) }}{{ scale_suffix }}: the trajectory overwhelmingly confirms the claim and its contribution.
+- {{ "%g"|format(0.6 * scale_max) }}–{{ "%g"|format(0.8 * scale_max) }}{{ scale_suffix }}: the trajectory directly supports the claim; remaining doubt is minor.
+- {{ "%g"|format(0.4 * scale_max) }}–{{ "%g"|format(0.6 * scale_max) }}{{ scale_suffix }}: the claim is plausible but notable unknowns remain.
+- {{ "%g"|format(0.2 * scale_max) }}–{{ "%g"|format(0.4 * scale_max) }}{{ scale_suffix }}: support is weak, indirect, or ambiguous: the evidence's claim is more likely to be false than true.
+- {{ "%g"|format(0.0 * scale_max) }}–{{ "%g"|format(0.2 * scale_max) }}{{ scale_suffix }}: the trajectory substantially contradicts the claim.
+
+Return a confidence from {{ "%g"|format(scale_min) }}{{ scale_suffix }} (no confidence) to {{ "%g"|format(scale_max) }}{{ scale_suffix }} (complete confidence) and a brief rationale.
+
+<target_evidence>
+Claim: {{ evidence.auditable_claim }}
+{% if evidence.contribution is defined %}Contribution: {{ evidence.contribution }}
+{% endif -%}
+{% if evidence.step_numbers is defined and evidence.step_numbers %}Cited Action Steps: {{ evidence.step_numbers | join(", ") }}
+{% else %}Cited Action Steps: none
+{% endif -%}
+</target_evidence>
