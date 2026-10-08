@@ -154,15 +154,6 @@ Please cite the manuscript if you use this code or the accompanying datasets:
 
 Machine-readable citation metadata is provided in [CITATION.cff](CITATION.cff).
 
-## License
-
-Copyright (c) 2026, Megagon Labs, Inc. All rights reserved.
-
-This software is licensed under the
-[BSD 3-Clause License (with Attribution / NOTICE Requirement)](LICENSE),
-using the license text from [Blue](https://github.com/megagonlabs/blue/blob/v1.1/LICENSE).
-Megagon Labs, Inc. is the original source and copyright holder of this software.
-Original repository: [Confidence Reasoning Graphs](https://github.com/megagonlabs/crg_ge).
 
 ## Disclosures:
 
